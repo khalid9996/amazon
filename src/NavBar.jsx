@@ -27,14 +27,14 @@ const NavBar = () => {
 
           
           <Link to="/login" className='nav__link'>
-            <div className="nav__option">
+            <div className="smallm nav__option">
             <span className='nav__optionLineOne'>hello khalid</span>
             <span className='nav__optionLineTwo'>Sign In</span>
             </div>
           </Link>
 
           
-          <Link to="/login" className='nav__link'>
+          <Link to="/login" className='nav__link hide'>
             <div className="nav__option">
             <span className='nav__optionLineOne'>Return</span>
             <span className='nav__optionLineTwo'>Orders</span>
@@ -42,7 +42,7 @@ const NavBar = () => {
           </Link>
 
           
-          <Link to="/login" className='nav__link'>
+          <Link to="/login" className='nav__link hide'>
             <div className="nav__option">
             <span className='nav__optionLineOne'>Your</span>
             <span className='nav__optionLineTwo'>Prime</span>

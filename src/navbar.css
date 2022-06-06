@@ -87,4 +87,15 @@
     .navbar {
         position: fixed;
     }
+    .navbar__logo {
+        width: 65px;
+    }
+    
+    .smallm {
+        transform: scale(80%);
+    }
+
+    .hide {
+        display: none;
+    }
   }
