@@ -30,9 +30,16 @@
 }
 
 .product > button {
-    background-color: #f0c14b;
-    border: 1px solid;
-    border-color: #a88734 #9c7e31 #846a29;
+    background-color: #FFD814;
+    border-radius: 0.6rem;
+    width: 200px;
+    height: 32px;
+    border: none;
+}
+
+.product > button:hover {
+    background-color: #e6b326;
+    cursor: pointer;
 }
 
 .product__rating {
