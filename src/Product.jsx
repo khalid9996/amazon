@@ -1,4 +1,3 @@
-import { type } from '@testing-library/user-event/dist/type';
 import React from 'react'
 import './product.css'
 import { useStateValue } from './StateProvider';
@@ -6,6 +5,7 @@ import { useStateValue } from './StateProvider';
 
 const Product = ({id, title, image, price, rating}) => {
     const [{basket}, dispatch] = useStateValue();
+    console.log(basket);
 
     const addToCart = () => {
         // add item to basket
