@@ -1,26 +1,19 @@
 export const initialState = {
-    basket: [
-        {
-            id:'103',
-            title: "MSI GeForce RTX 3090 Gaming X Trio 24G I 24GB GDDR6X I 384-bit PCI Express Gen 4 Gaming Graphic Card",
-            price: 2_14_999,
-            rating: 5,
-            image: "https://m.media-amazon.com/images/I/81f6GdD799L._SX450_.jpg"
-        },
-        {
-            id:'1030',
-            title: "MSI GeForce RTX 3090 Gaming X Trio 24G I 24GB GDDR6X I 384-bit PCI Express Gen 4 Gaming Graphic Card",
-            price: 2_14_999,
-            rating: 5,
-            image: "https://m.media-amazon.com/images/I/81f6GdD799L._SX450_.jpg"
-        }
-    ],
+    basket: [],
     user: null,
 };
+
+// For Cart Total
+// export const getBasketTotal = (basket) =>
+// basket?.reduce((amount, item) => item.price + amount, 0);
 
 const reducer = (state, action) => {
     console.log(action);
     switch(action.type) {
+        case "SET_USER": 
+            return {
+                ...state,user: action.user
+            }
         case "ADD_TO_BASKET":
             // ADD to basket
             return { 

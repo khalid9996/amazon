@@ -42,6 +42,10 @@
     cursor: pointer;
 }
 
+.product > button:active {
+    background-color: #a77a00;
+}
+
 .product__rating {
     display: flex;
 }
