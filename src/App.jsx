@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, useNavigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './Home'
 import NavBar from './NavBar'
@@ -11,6 +11,7 @@ import app from './firebase';
 
 
 function App() {
+  
   const [{ user }, dispatch] = useStateValue();
 
   //useEffect (IMPORTANT)
@@ -42,7 +43,7 @@ function App() {
    }
 
   }, [])
-
+  
   console.log("User is >>>> ",user);
 
   return (
@@ -51,12 +52,13 @@ function App() {
 
 
     <BrowserRouter>
+    
       <Routes>
     
       <Route path='/' element={<><NavBar/><Home/></>}></Route>
-      <Route path='/login' element={<><Login/></>}></Route>
+      <Route path='/login' element={user===null ? <><Login/></> : <Navigate to="/"/>}></Route>
       <Route path='/checkout' element={<><NavBar/><Checkout/></>}></Route>
-        
+      
       </Routes>
     </BrowserRouter>
       

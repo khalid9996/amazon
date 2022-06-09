@@ -14,6 +14,7 @@ const Home = () => {
     <div className="home__row">
 
       <Product 
+      className="product__comp"
       id="100" 
       title="iQOO Z5 5G (Mystic Space, 8GB RAM, 128GB Storage) | Snapdragon 778G 5G Processor" 
       price={23_990} 
