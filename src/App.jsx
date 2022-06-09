@@ -5,41 +5,45 @@ import NavBar from './NavBar'
 import Checkout from './Checkout';
 import Login from './Login'
 import { useStateValue } from './StateProvider';
-import { useEffect } from 'react';
-import { auth } from './firebase';
+import react, { useEffect } from 'react';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import app from './firebase';
 
 
 function App() {
   const [{ user }, dispatch] = useStateValue();
 
-  //useEffect <<<<<<<<<< POWERFUL
+  //useEffect (IMPORTANT)
   //piece of code which runs based on a given condition
 
+  const auth = getAuth(app);
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
       if (authUser) {
         //user is logged in
+        console.log(`Logging in ${authUser}`);
         dispatch({
           type: "SET_USER",
           user: authUser
         });
       } else {
         //user is logged out
+        console.log(`Logging out`);
         dispatch({
           type: "SET_USER",
-          user: null
+          user: null,
         });
       }
     });
 
-    return () => {
-      //Any Cleanup operation go in here
-      unsubscribe();
-    }
+   return () => {
+     //any Cleanup operation goes here
+     unsubscribe();
+   }
 
   }, [])
 
-  console.log(user);
+  console.log("User is >>>> ",user);
 
   return (
     <>

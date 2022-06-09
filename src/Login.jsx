@@ -1,35 +1,53 @@
 import React, { useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
-import { signInWithEmailAndPassword , createUserWithEmailAndPassword } from "firebase/auth";
+import {getAuth ,signInWithEmailAndPassword , createUserWithEmailAndPassword } from "firebase/auth";
 
-import { auth } from './firebase'
+import app from "./firebase"
+
 
 
 const Login = () => {
+
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const auth = getAuth(app);
     const login = event => {
         event.preventDefault(); //This stops the refresh
         // do login logic
-        signInWithEmailAndPassword(email,password)
-            .then((auth) => {
-                // Logged In, Redirect to Homepage
-                navigate('/');
-            })
-            .catch(e => alert(e.message));
+        signInWithEmailAndPassword(auth, email, password)
+        .then((credential) => {
+            // Signed in 
+            alert("Signed In")
+            navigate("/");
+            // ...
+        })
+        .catch((error) => {
+            // const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(errorMessage);
+  });
     }
 
     const register = event => {
         event.preventDefault(); //This stops the refresh
         // do register logic
-        createUserWithEmailAndPassword(email, password)
-        .then(auth => {
-            //created a user and Logged In, redirect to homepage
+        console.log(email);
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((credential) => {
+            // Signed in 
+            alert("Signed Up");
+            navigate("/");
+            // ...
         })
-        .catch((e) => alert(e.message));
+        .catch((error) => {
+            const errorMessage = error.message;
+            alert(errorMessage);
+            
+            // ..
+        });
     }
 
   return (

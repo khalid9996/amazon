@@ -6,9 +6,24 @@ import {FiShoppingCart} from 'react-icons/fi'
 import { useStateValue } from './StateProvider'
 
 
+import { getAuth, signOut } from "firebase/auth";
+import app from './firebase'
+
+
 const NavBar = () => {
-  const [{ basket }, dispatch] = useStateValue();
-  console.log(basket);
+  const [{ user , basket }] = useStateValue();
+  
+  const logOut = () => {
+    const auth = getAuth(app);
+    signOut(auth).then(() => {
+      console.log(user)
+      alert("Logged Out...");
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+  }
+
 
   return (
     <nav className='navbar'>
@@ -31,15 +46,15 @@ const NavBar = () => {
         <div className="header__nav">
 
           
-          <Link to="/login" className='nav__link'>
-            <div className="smallm nav__option">
-            <span className='nav__optionLineOne'>hello khalid</span>
-            <span className='nav__optionLineTwo'>Sign In</span>
+          <Link to={user===null ? "/login" : ""} className='nav__link'>
+            <div onClick={user===null ? "" : logOut } className="smallm nav__option">
+            <span className='nav__optionLineOne'>Hello, {user===null ? "Stranger" : user.email}</span>
+            <span className='nav__optionLineTwo'>{user===null? "Sign In" : "Sign Out"}</span>
             </div>
           </Link>
 
           
-          <Link to="/login" className='nav__link hide'>
+          <Link to="/" className='nav__link hide'>
             <div className="nav__option">
             <span className='nav__optionLineOne'>Return</span>
             <span className='nav__optionLineTwo'>Orders</span>
@@ -47,7 +62,7 @@ const NavBar = () => {
           </Link>
 
           
-          <Link to="/login" className='nav__link hide'>
+          <Link to="/" className='nav__link hide'>
             <div className="nav__option">
             <span className='nav__optionLineOne'>Your</span>
             <span className='nav__optionLineTwo'>Prime</span>
